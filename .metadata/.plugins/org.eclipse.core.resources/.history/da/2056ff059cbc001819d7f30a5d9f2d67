@@ -1,0 +1,215 @@
+package page_Verifications;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import commonFunctions.WebElementCommon;
+import commonMethods.Log;
+import page_Actions.ACR_PracticeInformationPage_Actions;
+import page_Locators.ACR_PracticeInformationPage_Locators;
+
+public class ACR_PracticeInformation_Verifications {
+	
+	WebDriver driver = null;
+	WebElement element = null;
+	ACR_PracticeInformationPage_Locators pageTwoLoc = null;
+	ACR_PracticeInformationPage_Actions pageTwoAct = null;
+	
+	public ACR_PracticeInformation_Verifications(WebDriver driver){
+		
+		this.driver = driver;
+		pageTwoLoc = new ACR_PracticeInformationPage_Locators(driver);
+		pageTwoAct = new ACR_PracticeInformationPage_Actions(driver);
+	}
+	
+	public void verify_enterPracticeName(String practiceName){
+		element = pageTwoLoc.getPracticeNametextbox();
+		if(element != null){
+			if(WebElementCommon.IsDisplayed(element)){
+				if(WebElementCommon.IsClickable(element, driver)){
+					if(pageTwoAct.enterPracticeName(practiceName)){
+						Log.info("practiceName is entered msg frm log");
+					}else{
+						System.out.println("practiceName is not entered");
+					}	
+				}else{
+					System.out.println("Textbox for practiceName is not Clickable");
+				}			
+			}else{
+				System.out.println("Textbox for practiceName is not Displayed");
+			}		
+		}else{
+			System.out.println("Element for practiceName is not found");
+		}
+	}
+	
+	public void verify_enterAddress1(String address1){
+		element = pageTwoLoc.Address1textbox();
+		if(element != null){
+			if(WebElementCommon.IsDisplayed(element)){
+				if(WebElementCommon.IsClickable(element, driver)){
+					if(pageTwoAct.enterAddress1(address1)){
+						System.out.println("Address1 is entered");
+					}else{
+						System.out.println("Address1 is not entered");
+					}	
+				}else{
+					System.out.println("Textbox for Address1 is not Clickable");
+				}			
+			}else{
+				System.out.println("Textbox for Address1 is not Displayed");
+			}		
+		}else{
+			System.out.println("Element for Address1 is not found");
+		}
+	}
+	
+	public void verify_enterAddress2(String address2){
+		element = pageTwoLoc.Address2textbox();
+		if(element != null){
+			if(WebElementCommon.IsDisplayed(element)){
+				if(WebElementCommon.IsClickable(element, driver)){
+					if(pageTwoAct.enterAddress2(address2)){
+						System.out.println("Address2 is entered");
+					}else{
+						System.out.println("Address2 is not entered");
+					}	
+				}else{
+					System.out.println("Textbox for Address2 is not Clickable");
+				}			
+			}else{
+				System.out.println("Textbox for Address2 is not Displayed");
+			}		
+		}else{
+			System.out.println("Element for Address2 is not found");
+		}
+	}
+	
+	public void verify_enterCity(String city){
+		element = pageTwoLoc.citytextbox();
+		if(element != null){
+			if(WebElementCommon.IsDisplayed(element)){
+				if(WebElementCommon.IsClickable(element, driver)){
+					if(pageTwoAct.enterCity(city)){
+						System.out.println("city is entered");
+					}else{
+						System.out.println("city is not entered");
+					}	
+				}else{
+					System.out.println("Textbox for city is not Clickable");
+				}			
+			}else{
+				System.out.println("Textbox for city is not Displayed");
+			}		
+		}else{
+			System.out.println("Element for city is not found");
+		}
+	}
+	
+	public void verify_enterZip(String zip){
+		element = pageTwoLoc.ziptextbox();
+		if(element != null){
+			if(WebElementCommon.IsDisplayed(element)){
+				if(WebElementCommon.IsClickable(element, driver)){
+					if(pageTwoAct.enterZip(zip)){
+						System.out.println("zip is entered");
+					}else{
+						System.out.println("zip is not entered");
+					}	
+				}else{
+					System.out.println("Textbox for zip is not Clickable");
+				}			
+			}else{
+				System.out.println("Textbox for zip is not Displayed");
+			}		
+		}else{
+			System.out.println("Element for zip is not found");
+		}
+	}
+	
+	public void verify_SelectState(String state){
+		element = pageTwoLoc.statetextbox();
+		if(element != null){
+			if(WebElementCommon.IsDisplayed(element)){
+				if(WebElementCommon.IsClickable(element, driver)){
+					if(pageTwoAct.selectState(state)){
+						System.out.println("State is Selected");
+					}else{
+						System.out.println("State is not Selected");
+					}	
+				}else{
+					System.out.println("Field for state is not Clickable");
+				}			
+			}else{
+				System.out.println("Field for state is not Displayed");
+			}		
+		}else{
+			System.out.println("Element for State is not found");
+		}
+	}
+	
+	public void verify_SelectPracticeSetting(String practiceSetting){
+		element = pageTwoLoc.statetextbox();
+		if(element != null){
+			if(WebElementCommon.IsDisplayed(element)){
+				if(WebElementCommon.IsClickable(element, driver)){
+					if(pageTwoAct.selectPracticeSetting(practiceSetting)){
+						System.out.println("practiceSetting is Selected");
+					}else{
+						System.out.println("practiceSetting is not Selected");
+					}	
+				}else{
+					System.out.println("Field for practiceSetting is not Clickable");
+				}			
+			}else{
+				System.out.println("Field for practiceSetting is not Displayed");
+			}		
+		}else{
+			System.out.println("Element for practiceSetting is not found");
+		}
+	}
+	
+	public void verify_saveBtnClick(){
+		element = pageTwoLoc.SaveBtn();
+		if(element != null){
+			if(WebElementCommon.IsDisplayed(element)){
+				if(WebElementCommon.IsClickable(element, driver)){
+					if(pageTwoAct.clickSaveButton()){
+						System.out.println("save button is clicked");
+					}else{
+						System.out.println("save button is not clicked");
+					}	
+				}else{
+					System.out.println("save button is not Clickable");
+				}			
+			}else{
+				System.out.println("save button is not Displayed");
+			}		
+		}else{
+			System.out.println("save button is not found");
+		}
+	}
+	
+	public ACR_PracticeInformation_Verifications pageTwoTask(String practiceName, String address1,String address2,String city,String zip,String state, String practiceSetting){
+		
+		ACR_PracticeInformation_Verifications pageTwoVer = null;
+		
+		try {
+			verify_enterPracticeName(practiceName);
+			verify_enterAddress1(address1);
+			verify_enterAddress2(address2);
+			verify_enterZip(zip);
+			verify_SelectState(state);
+			verify_SelectPracticeSetting(practiceSetting);
+			verify_enterCity(city);
+			verify_saveBtnClick();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return pageTwoVer;
+		
+	}
+	
+}

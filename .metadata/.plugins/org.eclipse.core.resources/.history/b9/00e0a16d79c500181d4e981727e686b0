@@ -1,0 +1,176 @@
+package DemoMaven.UI_Map.DashBoard;
+
+import org.openqa.selenium.By;
+
+public class DashBoardLocators {
+	
+	public By measureSetDropDownActiveLaabl = By.xpath("//*[@id='txtMeasureSet']");	
+	public By measureSetDropDownActiveDD2018 = By.xpath("//tr/td[@class='width-5']/input[@class='chkmultiselect radioclass']");	
+	public By measureSetDropDownCloseButton = By.xpath("//*[@id='MasterWrapperMeasureSet']/div[2]/a");
+	public By OutcomeMeasures=By.xpath("//*[@id='sample-table-1']/tbody[1]/tr[@id]/td[5][contains(text(),'YES')]");
+	
+	public  By ClickOnPractice=By.xpath("//*[@id='row3a24533f-2471-4b34-9370-6b5749304216']/div[1]/h4/div/table/tbody/tr/td/a");
+	
+	public By measureSetDropDown = By.xpath("//*[@id='txtMeasureSet']");	
+	public By measureSet2017MeasuresetRB= By.xpath("//*[@id='chkddl43619a92-b44d-47c9-880d-f168c3ad211d']");	
+	
+	
+	//Xpath for Practice-PatientDrilllDown
+	public By measurePracticePerformance = By.xpath("//*[@id='tr9acd0ea8-596e-46e6-8dcd-25ad1af84a62']/td[4]/table/tbody/tr/td[1]/table/tbody/tr/td[1]/div[1]");
+	public By measurePracticePerfromanceTrendMETCount = By.xpath("//*[@id='divPerformanceTrande']/div[2]/div[2]/table/tbody/tr[1]/td[3]/a");
+	public By measurePracticePerfromanceTrendPatientDrillDownCount = By.xpath("//*[@id='divnumeratorPager']/b");
+	
+	
+	// TC_DetailedPPDrillDownCountNR 
+	public By ProvideSubMenu = By.xpath("//*[@id='ctl00_ctl00_MainContent_divLeftMenu']/ul/li[1]/ul/li[2]/a");
+	public By ProvideCATARACTTESTMeasue = By.xpath("//*[@id='rowcab91ed2-5265-42e4-a5d0-fd8008665646']/div[1]/h4/div/table/tbody/tr/td[1]/a/i");
+	public By ProvideIRISeCQM1Measue = By.xpath("//*[@id='sample-table-1']/tbody/tr[5]/td[1]/i");
+	public By ProvidePerformanceQuarter = By.xpath("//*[@id='9acd0ea8-596e-46e6-8dcd-25ad1af84a62']/tbody/tr[1]/td[3]/a");
+	public By ProvideCATARACTTESTDrillDownValue = By.xpath("//*[@id='divProviderDrilDownPager']/b");
+	public By ProvideCATARACTTESTDrillDownCloseBtn = By.xpath(".//*[@id='ModalNumerator']/div/div/div[1]/button");
+	
+	
+	
+	public By PracticeSubMenu = By.xpath("//*[@id='ctl00_ctl00_MainContent_divLeftMenu']/ul/li[1]/ul/li[1]/a");
+	public By PracticeMeasureCount = By.xpath("//*[@id='divPager']/div[1]");
+	public By PracticeFavoritesBtn = By.xpath("//*[@id='aspnetForm']/div[3]/div[2]/div[1]/div/div[1]/table/tbody/tr/td[11]");
+	
+	
+	
+	
+	
+	public By Copyrightloc=By.xpath("//a[contains(text(), '© 2018')]");
+	public By Copyrighttab1=By.xpath("//div[@class='tabbable']/ul/li[1]/a");
+	public By Copyrighttab2=By.xpath("//div[@class='tabbable']/ul/li[2]/a");
+	public By Copyrighttab3=By.xpath("//div[@class='tabbable']/ul/li[3]/a");
+	public By Copyrighttab4=By.xpath("//div[@class='tabbable']/ul/li[4]/a");
+	public By copyrightpopupclosebutton=By.xpath("//div[@id='modaltermsandcondition']/div/div/div/button[@class='close modal-close-button']/img");
+	
+	
+	public By ProviderpatientcountNR=By.xpath("//div[@id='divProviderDrilDownPager']/b");
+	public By DashboardProvider=By.xpath("//a[@data-parent='EHR Dashboard' and @data-module='Provider']");
+	//public By rollnonroll=By.xpath("//input[@id='RollNonRoll']");
+	public By rollnonroll=By.xpath("//span[@class='lbl']");
+	public By OurProvider=By.xpath("//a[@data-parent='#accordion' and @href='#collapse9bdca45e-db69-430b-ba6d-004c80fa597b']");
+	public By firstmeasure=By.xpath("//span[text()='IRIS eCQM 1']"); //Xpath for 'IRIS eCQM 1' Measureset
+	public By clickoncount=By.xpath("//table[@id='sample-table-1']/tbody/tr[@id]/td/div/div/div[@class='pull-right']/table/tbody/tr[1]/td[3]/a");
+	public By patientdrilldownclosebutton=By.xpath("//*[@id='ModalNumerator']/div/div/div[1]/button");
+	
+	
+	//-----------------TC-0014
+	public By practicemeasurepopupprovidertab=By.xpath("//ul[@id='tabdashboard']/li/a[@data-href='#PROVIDERS']");
+	public By catractprovider=By.xpath("//span[contains(text(),'CATARACT,TEST')]");
+	public By countmet=By.xpath("//a[@onclick='fnGetPatientDrillDown(\"2608\", \"Numerator\",\"Cataract,Test\",2)']");
+	public By metcount=By.xpath("//div[@id='divnumeratorPager']/b");
+	public By practicefirstmeasure=By.xpath("//td[./text()=' IRIS eCQM 1']");
+	
+	
+	
+	
+	public By ClickonPracticeTab=By.xpath("//*[@id='ctl00_ctl00_MainContent_divLeftMenu']/ul/li[1]/ul/li[1]/a");
+	public By HighpriorityMeasures=By.xpath("//*[@id='sample-table-1']/tbody[1]/tr[@id]/td[6][contains(text(),'YES')]");
+	//public By ClickOnPractice=By.xpath("//*[@id]/div[1]/h4/div/table/tbody/tr/td[1]/a");
+	public By QCDR2018eCQM_QPP=By.xpath("//*[@id='chkddl9d9e7b99-ccfb-4dd9-8b51-0f45dd96893d']");
+	//public By measureSetDropDown = By.xpath("//*[@id='txtMeasureSet']");	
+	//public By measureSet2017MeasuresetRB= By.xpath("//*[@id='chkddl43619a92-b44d-47c9-880d-f168c3ad211d']");	
+	
+	public By SelectProvidersubmenu1= By.xpath("//*[@id='ctl00_ctl00_MainContent_divLeftMenu']/ul/li[1]/ul/li[2]/a");
+	
+	public By getonprovider= By.xpath("(//div[1]/h4/div/table/tbody/tr/td[1]/a)[1]");
+	public By clickonprovider= By.xpath("(//div[1]/h4/div/table/tbody/tr/td[1]/a)[1]");	
+
+	public By Selectmeasure= By.xpath("//*[@id='sample-table-1']/tbody[1]/tr[1]/td[1]");
+	
+	public By ClickonmetCount= By.xpath("//*[@id]/tbody/tr[1]/td[3]/a");
+	public By getprovidertext= By.xpath("//*[@id='spnModalPatientDrilDownHeader']");
+	public By closePopUp= By.xpath("//*[@id='ModalNumerator']/div/div/div[1]/button/img");
+	public By closeDrillDownPopUp= By.xpath("//*[@id='ModalSummryProviderLocationPractice']/div/div/button/img");
+	public By getNationalAverageondrilldown= By.xpath("//*[@id='spanNationalAverage']");
+	public By getNationalAverageonlandingpage= By.xpath("//td[3]/table/tbody/tr/td/table/tbody/tr/td[1]/div[4]");
+	
+	
+	// Surbhi
+	
+	public By providerMenu = By.xpath("//*[@id='ctl00_ctl00_MainContent_divLeftMenu']/ul/li[1]/ul/li[2]/a");
+	public By RollingProviderRecord = By.xpath("//*[@id='divProviderPager']/div[1]");
+   // public By RollingProviderRecord = By.xpath("//div[@class='widget-box ']/div[@class='widget-body']/div/div/div/div");
+	public By NRolling = By.xpath("//*[@type='checkbox' and @id='RollNonRoll']");
+	
+	//Xpath for provider-PatientDrilllDown
+	public By ProviderMeasureClick = By.xpath("//*[@id='rowcab91ed2-5265-42e4-a5d0-fd8008665646']/div[1]/h4/div/table/tbody/tr/td[1]/a/i");
+	public By MeasureClick = By.xpath("//*[@id='sample-table-1']/tbody/tr[5]/td[1]/i");
+	public By MetCount = By.xpath("//*[@id='9acd0ea8-596e-46e6-8dcd-25ad1af84a62']/tbody/tr[1]/td[3]/a");
+	public By DrillDownCount = By.xpath("//*[@id='divProviderDrilDownPager']/b");
+	public By drillDownClose = By.xpath("//*[@id='ModalNumerator']/div/div/div[1]/button/img");
+	
+	
+	
+	// Poonam
+	public By measurePracticePerfromanceTrendPatientDrillDownCountCloseWindow = By.xpath("//*[@id='ModalNumerator']/div/div/div[1]/button/img");
+	//Xpath for Practice-All Tab for Rolling
+	public By practicePerformanceAllTab = By.xpath("//*[@id='tabdashboard']/li[4]/a");
+	public By measurePracticePerfromanceTrendCloseWindow = By.xpath("//*[@id='ModalSummryProviderLocationPractice']/div/div/button/img");
+	public By practicePerformanceAllTabProviderCount = By.xpath("//*[@id='divMeasureProviderPager']/b");
+	public By practicePerformanceAllTabCloseWindow = By.xpath("//*[@id='ModalSummryProviderLocationPractice']/div/div/button/img");
+	
+	//Xpath for nonrolling
+	public By practicePerformanceDashboardNR = By.xpath("//*[@id='tr3dd81505-8c2d-4130-b85d-e854d6b8bfcf']/td[3]/table/tbody/tr/td/table/tbody/tr/td[1]/div[2]");
+	public By practicePerformanceDashboardNRAllTab = By.xpath("//*[@id='tabdashboard']/li[4]/a");
+	public By practicePerformanceDashboardNRProviderCount = By.xpath("//*[@id='divMeasureProviderPager']/b");
+	public By practicePerformanceDashboardRPerfromanceTrendNRMETCount = By.xpath("//*[@id='divPerformanceTrande']/div[2]/div[2]/table/tbody/tr[1]/td[3]/a");
+	public By practicePerformanceDashboardRPerfromanceTrendNRPatientcount = By.xpath("//*[@id='divnumeratorPager']/b");
+	
+	//Xpath for Practice-Provider tab
+	public By practicePerformanceDashboardProviderTab = By.xpath("//*[@id='tabdashboard']/li[3]/a");
+	public By practicePerformanceDashboardProviderTabRProvidersCount = By.xpath("//*[@id='divMeasureProviderPager']");
+	
+	
+	
+	
+	////awadhesh 
+	
+	
+	   public By FavouriteButton = By.xpath("//*[text()[contains(.,'FAVORITES')]]");
+	public By PracticeSubmodule = By.xpath("//*[./text()='Practice'][@class='navurl']");
+	public By TotalPageRecordWithoutPagination = By.xpath("//div[@id='divPager']/div");
+	public By PMeasureLocatorWithHigherCount  = By.xpath("//table[@id='sample-table-1']/tbody/tr[@style]//i[2][@data-toggle='tooltip'][@title='Higher score for this measure is Better']/../..");
+	public By PMeasureLocatorWithLowerCount= By.xpath("//table[@id='sample-table-1']/tbody/tr[@style]//i[2][@data-toggle='tooltip'][@title='Lower score for this measure is Better']/../..");
+	
+	
+	
+	//Xpath for Practice-PatientDrilllDown
+	
+	public By selectElementFromMeasuregrid = By.xpath("//*[@id='tr3dd81505-8c2d-4130-b85d-e854d6b8bfcf']/td[1]");
+	public By performanceTrend = By.xpath("//*[@id='tabdashboard']/li[1]/a");
+	public By selectQuarter = By.xpath("//*[@id='divPerformanceTrande']/div[2]/div[2]/table/tbody/tr[1]/td[3]/a");
+	public By observePracticeName = By.xpath("//*[@id='ModalNumerator']/div/div/div[1]/div[3]/div[1]/div[2]/div");
+	public By observeMeasureName= By.xpath("//*[@id='ModalNumerator']/div/div/div[1]/div[3]/div[2]/div[2]/div");
+	public By observeTooltip = By.xpath("//*[@id='sample-table-1']/tbody/tr[1]/td[5]/i[@class='icon-info-sign bigger-150 light-grey tooltip-hide']");
+	public By closePopup2 =By.xpath("//*[@id='ModalNumerator']/div/div/div[1]/button/img");
+	public By ClosePopup1= By.xpath("//*[@id='ModalSummryProviderLocationPractice']/div/div/button/img");
+	
+	
+	
+	// X-Path for Location Menu
+	
+	public By dashboardLocation = By.xpath("//*[@id='ctl00_ctl00_MainContent_divLeftMenu']/ul/li[1]/ul/li[3]/a");
+	public By dashboardLocationCount = By.xpath("//*[@id='divLocationPager']/div[1]");
+	public By dashboardLocationBubble = By.xpath("//*[@id='divLocationPager']/div[1]");
+	
+	// X-Path for Last Update
+	
+	public By dashboardLastUpdate = By.xpath("//*[@id='lblLastUpdatedValue']");
+	
+	
+	public By dashboardIRISeCQM1Measure = By.xpath("//*[@id='tr3dd81505-8c2d-4130-b85d-e854d6b8bfcf']/td[2]");
+	public By dashboardIRISeCQM1MeasureLocationBtn = By.xpath("//*[@id='tabdashboard']/li[2]/a");
+	public By dashboardIRISeCQM1MeasureLocationTotalCount = By.xpath("//*[@id='divMeasureLocationPager']/b");
+	
+
+	
+	
+	
+	
+	
+	
+  }

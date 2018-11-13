@@ -1,0 +1,819 @@
+package DemoMaven.Tests.DashBoard;
+
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.LogStatus;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+import DemoMaven.Utilities.SuiteBase;
+import DemoMaven.CommonActions.CommonAction.ExcelReader;
+import DemoMaven.CommonActions.DashBoard.DashBoardActions;
+import DemoMaven.CommonActions.CommonAction.CommonAction;
+import DemoMaven.CommonActions.CommonAction.CommonScript;
+import DemoMaven.CommonActions.Login.LoginActions;
+import DemoMaven.DataBase.DashBoard.DashBoardTestsDB;
+
+public class DashBoardTests extends SuiteBase {
+
+	CommonAction ca = new CommonAction();
+	String reportUrl = "";
+	String methodName;
+
+	@BeforeClass
+	public void setReport() {
+		reportUrl = generateReport("DashBoardfilename", "DashBoardDocTitle", "DashBoardreportName", "DetailsName");
+		// System.out.println("ReportUrl :"+reportUrl);
+	}
+
+	@BeforeMethod
+	public void getMethodName(Method method) {
+		methodName = method.getName();
+	}
+
+	private ExcelReader ex = new ExcelReader();
+	private String getDataFromDataproviderPasswordFileLocation = System.getProperty("user.dir")
+			+ rd.read_Configfile("login_excel");
+	private String getDataFromDataproviderMeasureCaseFileLocation = System.getProperty("user.dir")
+			+ rd.read_Configfile("SmokeAAO");
+
+	/*
+	 * Test Case ID - AUI_Login_01 Copyright 2018 FIGmd.in © 2018. All rights
+	 * reserved. The Displayer class displays text on the computer screen. Test
+	 * case Details - Verification user login successfully or not Author - Amol
+	 * Bande Date 18/07/2018
+	 */
+	@DataProvider(name = "TC_AutoLogin")
+	public Object[][] getDataFromDataproviderPassword() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] LoginData = ex.getDataingrid(getDataFromDataproviderPasswordFileLocation, "TC_AutoLogin_Data");
+		log.info("Dataprovider Ends");
+		return LoginData;
+	}
+
+	@Test(dataProvider = "TC_AutoLogin", priority = 1)
+	public void VerifyValidLogin(Hashtable<String, String> LoginExcelSheetData) throws Exception {
+
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		CommonScript loginAction = new CommonScript(driver, wait);
+
+		/*
+		 * Test case Details - Login to the application and verified user name
+		 */
+		String GetUserName = loginAction.VerifyValidLoginUser(methodName, LoginExcelSheetData, logger);
+		ca.verifyAssertEquals(GetUserName, LoginExcelSheetData.get("login_user"),
+				"Unable to verify \" " + LoginExcelSheetData.get("login_user") + "\" message for username.",
+				"\" " + LoginExcelSheetData.get("login_user") + "\" message for username verified successfully..",
+				methodName, logger, "TC_Login_01", driver);
+	}
+
+	/*
+	 * Testcase ID- TC_0002 : TC_DetailedPPDrillDownCountR" Copyright 2018
+	 * FIGmd.in © 2018. All rights reserved. The Displayer class displays text
+	 * on the computer screen.
+	 *
+	 * @author Amol Bande
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System
+	 */
+/*
+	@DataProvider(name = "TC_DetailedPPDrillDownCountR")
+	public Object[][] getDataFromDataproviderTC_DetailedPPDrillDownCountR() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_DetailedPPDrillDownCountR_D");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_DetailedPPDrillDownCountR", priority = 2)
+	public void TC_DetailedPPDrillDownCountR(Hashtable<String, String> TC_DetailedPPDrillDownCountR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of TC_DetailedPPDrillDownCountR
+		String DetailedPPDrillDownCount = DashBoardActionsActions.TC_DetailedPPDrillDownCountR(methodName,
+				TC_DetailedPPDrillDownCountR, logger);
+
+		// Taking DB count of TC_DetailedPPDrillDownCountR
+		HashMap<String, String> databseCountCrossCuttingMeasuresForMeasureSet2018 = dashBoardTestsDB
+				.TC_DetailedPPDrillDownCountR(TC_DetailedPPDrillDownCountR.get("Query"));
+
+		ca.verifyAssertEquals(DetailedPPDrillDownCount,
+				databseCountCrossCuttingMeasuresForMeasureSet2018.get("PatientuidUid_Count"),
+				"Unable to verify \" " + DetailedPPDrillDownCount
+						+ "\" message Detailed PP Drill Down Count Rolling from Database and UI is not getting matched.",
+				"\" " + DetailedPPDrillDownCount
+						+ "\"Detailed PP Drill Down Count Rolling from Database and UI getting matched..",
+				methodName, logger, "TC_0003", driver);
+	}
+*/
+	/*
+	 * * Testcase ID- TC_0003 : TC_DetailedPPDrillDownCountNR" Copyright 2018
+	 * FIGmd.in © 2018. All rights reserved. The Displayer class displays text
+	 * on the computer screen.
+	 *
+	 * @author Amol Bande
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System
+	 */
+/*
+	@DataProvider(name = "TC_DetailedPPDrillDownCountNR")
+	public Object[][] getDataFromDataproviderTC_DetailedPPDrillDownCountNR()
+			throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_DetailedPPDrillDownCountNR_D");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_DetailedPPDrillDownCountNR", priority = 3)
+	public void getDataFromDataproviderTC_DetailedPPDrillDownCountNR(
+			Hashtable<String, String> TC_DetailedPPDrillDownCountNR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		LoginActions loginAction = new LoginActions(driver, wait);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of TC_DetailedPPDrillDownCountNR
+		String DetailedPPDrillDownCount = DashBoardActionsActions.TC_DetailedPPDrillDownCountNR(methodName,
+				TC_DetailedPPDrillDownCountNR, logger);
+
+		// Taking DB count of TC_DetailedPPDrillDownCountNR
+		HashMap<String, String> databseCountCrossCuttingMeasuresForMeasureSet2018 = dashBoardTestsDB
+				.TC_DetailedPPDrillDownCountNR(TC_DetailedPPDrillDownCountNR.get("Query"));
+
+		ca.verifyAssertEquals(DetailedPPDrillDownCount,
+				databseCountCrossCuttingMeasuresForMeasureSet2018.get("PracticeUid_Count"),
+				"Unable to verify \" " + DetailedPPDrillDownCount
+						+ "\" message Detailed PP Drill Down Count Non Rolling from Database and UI is not getting matched.",
+				"\" " + DetailedPPDrillDownCount
+						+ "\" Detailed PP Drill Down Count Non Rolling from Database and UI getting matched..",
+				methodName, logger, "TC_0002", driver);
+
+		// Logiut the application
+		// loginAction.logOutApplication();
+		System.out.println("User logout successfully..");
+	}
+*/
+	/*
+	 * * Testcase ID- TC_0004 : TC_PracticeMeasureCountR" Copyright 2018
+	 * FIGmd.in © 2018. All rights reserved. The Displayer class displays text
+	 * on the computer screen.
+	 *
+	 * @author Amol Bande
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System
+	 */
+/*
+	@DataProvider(name = "TC_PracticeMeasureCountR")
+	public Object[][] getDataFromDataproviderTC_PracticeMeasureCountR() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_PracticeMeasureCountR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_PracticeMeasureCountR", priority = 4)
+	public void TC_PracticeMeasureCountR(Hashtable<String, String> TC_DetailedPPDrillDownCountR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of TC_DetailedPPDrillDownCountR
+		String DetailedPPDrillDownCount = DashBoardActionsActions.TC_PracticeMeasureCountR(methodName,
+				TC_DetailedPPDrillDownCountR, logger);
+
+		// Taking DB count of TC_DetailedPPDrillDownCountR
+		HashMap<String, String> databseCountCrossCuttingMeasuresForMeasureSet2018 = dashBoardTestsDB
+				.TC_PracticeMeasureCountR(TC_DetailedPPDrillDownCountR.get("Query"));
+
+		ca.verifyAssertEquals(DetailedPPDrillDownCount,
+				databseCountCrossCuttingMeasuresForMeasureSet2018.get("QualityMeasureUid_Count"),
+				"Unable to verify \" " + DetailedPPDrillDownCount
+						+ "\" message Practice Measure Count Rolling from Database and UI is not getting matched.",
+				"\" " + DetailedPPDrillDownCount
+						+ "\"Practice Measure Count Rolling from Database and UI getting matched..",
+				methodName, logger, "TC_0004", driver);
+	}
+*/
+	
+	/* * Testcase ID- TC_0005 : TC_PracticeMeasureCountNR" Copyright 2018 FIGmd.in
+	 * © 2018. All rights reserved. The Displayer class displays text on the
+	 * computer screen.
+	 *
+	 * @author Amol Bande
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+	 
+/*
+	@DataProvider(name = "TC_PracticeMeasureCountNR")
+	public Object[][] getDataFromDataproviderTC_PracticeMeasureCountNR() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_PracticeMeasureCountNR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_PracticeMeasureCountNR", priority = 5)
+	public void TC_PracticeMeasureCountNR(Hashtable<String, String> TC_DetailedPPDrillDownCountR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of TC_DetailedPPDrillDownCountR
+		String DetailedPPDrillDownCount = DashBoardActionsActions.TC_PracticeMeasureCountNR(methodName,
+				TC_DetailedPPDrillDownCountR, logger);
+
+		// Taking DB count of TC_DetailedPPDrillDownCountR
+		HashMap<String, String> databseCountCrossCuttingMeasuresForMeasureSet2018 = dashBoardTestsDB
+				.TC_PracticeMeasureCountR(TC_DetailedPPDrillDownCountR.get("Query"));
+
+		ca.verifyAssertEquals(DetailedPPDrillDownCount,
+				databseCountCrossCuttingMeasuresForMeasureSet2018.get("QualityMeasureUid_Count"),
+				"Unable to verify \" " + DetailedPPDrillDownCount
+						+ "\" message Practice Measure Count non Rolling from Database and UI is not getting matched.",
+				"\" " + DetailedPPDrillDownCount
+						+ "\"Practice Measure Count non Rolling from Database and UI getting matched..",
+				methodName, logger, "TC_0005", driver);
+	}*/
+	
+	/*	* Testcase ID- TC_0006 : TC_PracticeFavoritesMeasureCountR" Copyright 2018
+	 * FIGmd.in © 2018. All rights reserved. The Displayer class displays text
+	 * on the computer screen.
+	 *
+	 * @author Amol Bande
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+	 
+/*
+	@DataProvider(name = "TC_PracticeFavoritesMeasureCountR")
+	public Object[][] getDataFromDataproviderTC_PracticeFavoritesMeasureCountR()
+			throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_PracticeFavoritesCountR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_PracticeFavoritesMeasureCountR", priority = 6)
+	public void TC_PracticeFavoritesMeasureCountR(Hashtable<String, String> TC_PracticeFavoritesMeasureCountR)
+			throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of TC_DetailedPPDrillDownCountR
+		String DetailedPPDrillDownCount = DashBoardActionsActions.TC_PracticeFavoritesMeasureCountR(methodName,
+				TC_PracticeFavoritesMeasureCountR, logger);
+
+		// Taking DB count of TC_DetailedPPDrillDownCountR
+		HashMap<String, String> databseCountCrossCuttingMeasuresForMeasureSet2018 = dashBoardTestsDB
+				.TC_PracticeFavoritesMeasureCountR(TC_PracticeFavoritesMeasureCountR.get("Query"));
+
+		ca.verifyAssertEquals(DetailedPPDrillDownCount,
+				databseCountCrossCuttingMeasuresForMeasureSet2018.get("FIGUserFavoriteUid"),
+				"Unable to verify \" " + DetailedPPDrillDownCount
+						+ "\" message Practice Favorites Measure Count Rolling from Database and UI is not getting matched.",
+				"\" " + DetailedPPDrillDownCount
+						+ "\" Practice Favorites Measure Count Rolling from Database and UI getting matched..",
+				methodName, logger, "TC_0006", driver);
+	}
+	*/
+	
+	/* * Testcase ID- TC_0007 : TC" Copyright 2018 FIGmd.in Â© 2018. All rights
+	 * reserved. The Displayer class displays text on the computer screen.
+	 *
+	 * @author Awadhesh Sengar
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+/*	 
+
+	@DataProvider(name = "TC_PracticeFavoritesMeasureCountNR")
+	public Object[][] getDataFromDataproviderTC_PracticeFavoritesMeasureCountNR()
+			throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"PFavoritesMeasureCountNR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_PracticeFavoritesMeasureCountNR", priority = 7)
+	public void TC_PracticeFavoritesMeasureCountNR(Hashtable<String, String> data) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+		String webCount = DashBoardActionsActions.TC_PracticeFavoritesMeasureCountNR(methodName, data, logger);
+
+		HashMap<String, String> databseCountFavouriteMeasureSet2017 = dashBoardTestsDB
+				.TC_Favourites2017MeasureSet(data.get("Query"));
+		System.out.println("Active measureset2018 UI_Count:" + webCount);
+		System.out.println("Active measureset2018 Db_Count:" + databseCountFavouriteMeasureSet2017.get("inactive"));
+		System.out.println("Active measureset2018 Db_Count:" + databseCountFavouriteMeasureSet2017.get("inactive"));
+
+		ca.verifyAssertEquals(webCount, databseCountFavouriteMeasureSet2017.get("inactive"),
+				"Unable to verify \" " + webCount
+						+ "\" message Favourite Measures from Database and UI for Measure Set IRIS is not getting matched.",
+				"\" " + webCount
+						+ "\"Favourite Measures from Database and UI for Measure Set IRIS  from Database and UI getting matched..",
+				methodName, logger, "TC_0033");
+	}
+*/
+	
+	/* Testcase ID- TC_0008 : TC" Copyright 2018 FIGmd.in Â© 2018. All rights
+	 * reserved. The Displayer class displays text on the computer screen.
+	 *
+	 * @author Awadhesh Sengar
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+/*	 
+
+	@DataProvider(name = "PMCountOfHigherScoreNR")
+	public Object[][] getDataFromDataproviderPMCountOfHigherScoreNR() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_PMCountOfHigherScore_data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "PMCountOfHigherScoreNR", priority = 8)
+	public void PMCountOfHigherScoreNR(Hashtable<String, String> data) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		LoginActions loginAction = new LoginActions(driver, wait);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+		String webCount = DashBoardActionsActions.TC_PMCountOfHigherScore(methodName, data, logger);
+
+		HashMap<String, String> databseCountPMHigherCount = dashBoardTestsDB.TC_PMCountOfHigherScore(data.get("Query"));
+		System.out.println("Measures with higher score better UI_Count:" + webCount);
+		System.out.println("Measures with higher score better Db_Count:" + databseCountPMHigherCount.get("inactive"));
+
+		ca.verifyAssertEquals(webCount, databseCountPMHigherCount.get("inactive"),
+				"Unable to verify \" " + webCount
+						+ "\" message Higher  Score is  Better measures from Database and UI for Measure Set IRIS is not getting matched.",
+				"\" " + webCount
+						+ "\"Higher  Score is  Better from Database and UI for Measure Set IRIS  from Database and UI getting matched..",
+				methodName, logger, "TC_009");
+
+	}
+*/
+	
+	/*
+	 * Testcase ID- TC_0009 : TC" Copyright 2018 FIGmd.in Â© 2018. All rights
+	 * reserved. The Displayer class displays text on the computer screen.
+	 *
+	 * @author Awadhesh Sengar
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+	 
+/*  //------------THIS TESTCASE IS NOT VALID FOR APTA AS NO SUCH MEASURE IS AVAILABLE-------------------------//
+	@DataProvider(name = "PMCountOfLowerScore")
+	public Object[][] getDataFromDataproviderPMCountOfLowerScore() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_PMCountOfLowerScore_data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "PMCountOfLowerScore", priority = 9)
+	public void PMCountOfLowerScore(Hashtable<String, String> data) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		LoginActions loginAction = new LoginActions(driver, wait);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+		String webCount = DashBoardActionsActions.TC_PMCountOfLowerScore(methodName, data, logger);
+
+		HashMap<String, String> databseCountPMLowerCount = dashBoardTestsDB.PMCountOfLowerScore(data.get("Query"));
+		System.out.println("Measures with Lower score better UI_Count:" + webCount);
+		System.out.println("Measures with Lower score better Db_Count:" + databseCountPMLowerCount.get("inactive"));
+
+		ca.verifyAssertEquals(webCount, databseCountPMLowerCount.get("inactive"),
+				"Unable to verify \" " + webCount
+						+ "\" message Lower  Score is  Better measures from Database and UI for Measure Set IRIS is not getting matched.",
+				"\" " + webCount
+						+ "\"Lower  Score is  Better from Database and UI for Measure Set IRIS  from Database and UI getting matched..",
+				methodName, logger, "TC_009");
+
+	}*/
+	
+	/*
+	 * Testcase ID- TC_0010s : TC_LocationBubbleCountR" Copyright 2018 FIGmd.in
+	 * © 2018. All rights reserved. The Displayer class displays text on the
+	 * computer screen.
+	 *
+	 * @author Ankita Gaur
+	 * 
+	 * @version 1.0 09/04/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+	 //-------------------------------THIS TESTCASE IS NOT VALID FOR APTA----------------------------------------------------//
+/*
+	@DataProvider(name = "TC_LocationBubbleCountR")
+	public Object[][] getDataFromDataproviderCount() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation, "TC_LocationCountNR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_LocationBubbleCountR", priority = 9)
+	public void VerifyLocationcount(Hashtable<String, String> TC_LocationBubbleCountR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of Active Location Quarterly Bubble Count
+
+		String webCount = DashBoardActionsActions.TC_LocationBubbleCountR(methodName, TC_LocationBubbleCountR, logger);
+
+		// Taking DB count of Active Location Quarterly Bubble Count
+		HashMap<String, String> TC_LocationBubbleCountRt = dashBoardTestsDB
+				.TC_LocationBubbleCountR(TC_LocationBubbleCountR.get("Query"));
+
+		System.out.println("Active measureset2018 UI_Count:" + webCount);
+		System.out.println("Active measureset2018 Db_Count:" + TC_LocationBubbleCountRt.get("TotalCount"));
+
+		ca.verifyAssertEquals((webCount), TC_LocationBubbleCountRt.get("TotalCount"),
+				"Unable to verify \" " + (webCount)
+						+ "\"Location bubble count rolling from Database and UI data is not getting matched..",
+				"\" " + (webCount) + "\"Location bubble count rolling from Database and UI data is getting matched..",
+				methodName, logger, "TC_0019", driver);
+
+	}
+*/
+	
+	/* * Testcase ID- TC_0011 : TC_LocationCountNR" Copyright 2018 FIGmd.in ©
+	 * 2018. All rights reserved. The Displayer class displays text on the
+	 * computer screen.
+	 *
+	 * @author Ankita Gaur
+	 * 
+	 * @version 1.0 09/04/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+	/* 
+
+	@DataProvider(name = "TC_LocationCountNR")
+	public Object[][] getDataFromDataTC_LocationCountNR() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation, "TC_LocationCountNR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_LocationCountNR", priority = 9)
+	public void TC_LocationCountNR(Hashtable<String, String> TC_LocationCountNR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of Active Location Quarterly Non Rolling
+		String webCount = DashBoardActionsActions.TC_LocationCountNR(methodName, TC_LocationCountNR, logger);
+		// Taking DB count of Active Location Quarterly Non Rolling
+		HashMap<String, String> TC_LocationCountNRt = dashBoardTestsDB
+				.TC_LocationCountNR(TC_LocationCountNR.get("Query"));
+
+		System.out.println("Active measureset2018 UI_Count:" + webCount);
+		System.out.println("Active measureset2018 Db_Count:" + TC_LocationCountNRt.get("TotalCount"));
+		ca.verifyAssertEquals((webCount), TC_LocationCountNRt.get("TotalCount"),
+				"Unable to verify \" " + (webCount)
+						+ "\"Location count non-rolling data from Database and UI is not getting matched.",
+				"\" " + (webCount) + "\"Location count non-rolling data count from Database and UI getting matched..",
+				methodName, logger, "TC_0018", driver);
+	}
+	*/
+	
+	
+	/* * Testcase ID- TC_0012 : TC_LocationCountR" Copyright 2018 FIGmd.in © 2018.
+	 * All rights reserved. The Displayer class displays text on the computer
+	 * screen.
+	 *
+	 * @author Ankita Gaur
+	 * 
+	 * @version 1.0 09/04/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+/*	 
+	@DataProvider(name = "TC_LocationCountR")
+	public Object[][] getDataFromDataTC_LocationCountR() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation, "TC_LocationCountR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_LocationCountR", priority = 10)
+	public void TC_LocationCountR(Hashtable<String, String> TC_LocationCountR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		LoginActions loginAction = new LoginActions(driver, wait);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of Active Location Quarterly Rolling
+		String webCount = DashBoardActionsActions.TC_LocationCountR(methodName, TC_LocationCountR, logger);
+		// Taking DB count of Active Location Quarterly Rolling
+		HashMap<String, String> TC_LocationCountRt = dashBoardTestsDB.TC_LocationCountR(TC_LocationCountR.get("Query"));
+		System.out.println("Active measureset2018 UI_Count:" + webCount);
+		System.out.println("Active measureset2018 Db_Count:" + TC_LocationCountRt.get("TotalCount"));
+		ca.verifyAssertEquals((webCount), TC_LocationCountRt.get("TotalCount"),
+				"Unable to verify \" " + (webCount)
+						+ "\"Location count rolling data from Database and UI is not getting matched.",
+				"\" " + (webCount) + "\"Location count rolling data from Database and UI getting matched..", methodName,
+				logger, "TC_0020", driver);
+	}*/
+	
+	/* * Testcase ID- TC_0013 : TC_VerifyLastUpdatedDate" Copyright 2018 FIGmd.in
+	 * © 2018. All rights reserved. The Displayer class displays text on the
+	 * computer screen.
+	 *
+	 * @author Ankita Gaur
+	 * 
+	 * @version 1.0 09/05/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+	 
+/*
+	@DataProvider(name = "TC_VerifyLastUpdatedDate")
+	public Object[][] getDataFromDataTC_VerifyLastUpdatedDate() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_VerifyLastUpdatedDate_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_VerifyLastUpdatedDate", priority =11)
+	public void TC_VerifyLastUpdatedDate(Hashtable<String, String> TC_VerifyLastUpdatedDate) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+		// Taking UI data of Last Updated Date
+		String webCount = DashBoardActionsActions.TC_VerifyLastUpdatedDate(methodName, TC_VerifyLastUpdatedDate,
+				logger);
+		// Taking DB data of Last Updated Date
+		HashMap<String, String> TC_VerifyLastUpdatedDatet = dashBoardTestsDB
+				.TC_VerifyLastUpdatedDate(TC_VerifyLastUpdatedDate.get("Query"));
+		System.out.println("Active measureset2018 UI_Count:" + webCount);
+		System.out.println("Active measureset2018 Db_Count:" + TC_VerifyLastUpdatedDatet.get("EndTime"));
+		ca.verifyAssertEquals((webCount), TC_VerifyLastUpdatedDatet.get("EndTime"),
+				"Unable to verify \" " + (webCount)
+						+ "\"Last Updated date from Database and UI is not getting matched.",
+				"\" " + (webCount) + "\"Last Updated date from Database and UI getting matched..", methodName, logger,
+				"TC_0012", driver);
+	}*/
+	
+	/* Testcase ID- TC_0014 : TC_ProviderCountR" Copyright 2018 FIGmd.in © 2018.
+	 * All rights reserved. The Displayer class displays text on the computer
+	 * screen.
+	 *
+	 * @author Surabhi Shah
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+/*	 
+	@DataProvider(name = "TC_ProviderCountR")
+	public Object[][] TC_ProviderCountR() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation, "TC_ProviderCountR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_ProviderCountR", priority =12)
+	public void VerifyProvidercount(Hashtable<String, String> TC_ProviderCountR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		LoginActions loginAction = new LoginActions(driver, wait);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+		// Taking UI count of Active MeasureSet2018
+		String webCount = DashBoardActionsActions.TC_ProviderCountR(methodName, TC_ProviderCountR, logger);
+		// Taking DB count of Active MeasureSet2018
+		HashMap<String, String> TC_ProviderCountRt = dashBoardTestsDB.TC_ProviderCountR(TC_ProviderCountR.get("Query"));
+		System.out.println("Active measureset2018 UI_Count:" + webCount);
+		System.out.println("Active measureset2018 Db_Count:" + TC_ProviderCountRt.get("inactive"));
+
+		ca.verifyAssertEquals((webCount), TC_ProviderCountRt.get("inactive"),
+				"Unable to verify \" " + (webCount)
+						+ "\"Provider rolling count from Database and UI is not getting matched.",
+				"\" " + (webCount) + "\"Provider rolling count from Database and UI getting matched..", methodName,
+				logger, "TC_0002", driver);
+	}*/
+	
+	/* * Testcase ID- TC_0015 : TC_ProviderPatient DrillDownCountR" Copyright 2018
+	 * FIGmd.in © 2018. All rights reserved. The Displayer class displays text
+	 * on the computer screen.
+	 *
+	 * @author Surabhi Shah
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+/*	 
+	@DataProvider(name = "TC_ProviderPatientCount")
+	public Object[][] getDataFromDatadrillCount() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_ProviderPatientCount_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_ProviderPatientCount", priority = 13)
+	public void Verifydrilldowncount(Hashtable<String, String> TC_ProviderPatientCount) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		LoginActions loginAction = new LoginActions(driver, wait);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+		// Taking UI count of Active MeasureSet2018
+		String webCount = DashBoardActionsActions.TC_ProviderPatientCount(methodName, TC_ProviderPatientCount, logger);
+		// Taking DB count of Active MeasureSet2018
+		HashMap<String, String> databaseproviderdrilldowncount = dashBoardTestsDB
+				.TC_ProviderPatientCount(TC_ProviderPatientCount.get("Query"));
+		System.out.println("Active measureset2018 UI_Count:" + webCount);
+		System.out.println("Active measureset2018 Db_Count:" + databaseproviderdrilldowncount.get("TotalPatient"));
+
+		ca.verifyAssertEquals((webCount), databaseproviderdrilldowncount.get("TotalPatient"),
+				"Unable to verify \" " + (webCount)
+						+ "\" message provider patient count from Database and UI is not getting matched.",
+				"\" " + (webCount) + "\" provider patient count from Database and UI getting matched..", methodName,
+				logger, "TC_0027", driver);
+	}*/
+	
+	/* * Testcase ID- TC_0016 : TC_ProviderCountNR" Copyright 2018 FIGmd.in ©
+	 * 2018. All rights reserved. The Displayer class displays text on the
+	 * computer screen.
+	 *
+	 * @author Surabhi Shah
+	 * 
+	 * @version 1.0 08/29/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+	/* 
+
+	@DataProvider(name = "TC_ProviderCountNR")
+	public Object[][] getDataFromDataproviderNRCount() throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation, "TC_ProviderCountNR_Data");
+		log.info("Dataprovider Ends");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_ProviderCountNR", priority = 14)
+	public void ProviderCountNR(Hashtable<String, String> data) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		DashBoardActions DashBoardActionsActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+		// Taking UI count of Active MeasureSet2018
+		String webCount = DashBoardActionsActions.TC_ProviderCountNR(methodName, data, logger);
+
+		// Taking DB count of Active MeasureSet2018
+		HashMap<String, String> TC_ProviderCountNRTest = dashBoardTestsDB.TC_ProviderCountNR(data.get("Query"));
+		System.out.println("Active measureset2018 UI_Count:" + webCount);
+		System.out.println("Active measureset2018 Db_Count:" + TC_ProviderCountNRTest.get("inactive"));
+		ca.verifyAssertEquals((webCount), TC_ProviderCountNRTest.get("inactive"),
+				"Unable to verify \" " + webCount
+						+ "\" message Provider count for NR from database and UI is not getting matched.",
+				"\" " + (webCount) + "\"Provider count for NR from database and UI is  matched...", methodName, logger,
+				"TC_0033");
+	}*/
+	
+	/* * Testcase ID- TC_0021 : TC_PracticePerformanceTrendPatientDrillDownCountR"
+	 * Copyright 2018 FIGmd.in © 2018. All rights reserved. The Displayer class
+	 * displays text on the computer screen.
+	 *
+	 * @author PoonamZambare
+	 * 
+	 * @version 1.0 01/06/18
+	 * 
+	 * @throws SQLException
+	 * 
+	 * @see java.lang.System*/
+	 
+
+	@DataProvider(name = "TC_PracticePerformanceTrendPatientDrillDownCountR")
+	public Object[][] getDataFromDataproviderPracticePerformanceTrendPatientDrillDownCountR()
+			throws IOException, InvalidFormatException {
+		log.info("Dataprovider Start");
+		Object[][] object = ex.getDataingrid(getDataFromDataproviderMeasureCaseFileLocation,
+				"TC_PracticePTrendPatientDDCTRD");
+		log.info("Dataprovider Ends");
+		System.out.println("*************");
+		System.out.println("object :" + object);
+		System.out.println("*************");
+		return object;
+	}
+
+	@Test(dataProvider = "TC_PracticePerformanceTrendPatientDrillDownCountR", priority = 19)
+	public void TC_PracticePerformanceTrendPatientDrillDownCountR(
+			Hashtable<String, String> TC_PracticePerformanceTrendPatientDrillDownCountR) throws Exception {
+		WebDriverWait wait = new WebDriverWait(driver, 60);
+		LoginActions loginAction = new LoginActions(driver, wait);
+		DashBoardActions DashBoardActions = new DashBoardActions(driver, wait);
+		DashBoardTestsDB dashBoardTestsDB = new DashBoardTestsDB();
+
+		// Taking UI count of PracticePerformanceTrendPatientDrillDownCountR
+		String webCount = DashBoardActions.TC_PracticePerformanceTrendPatientDrillDownCountR(methodName,
+				TC_PracticePerformanceTrendPatientDrillDownCountR, logger);
+
+		// Taking DB count of PracticePerformanceTrendPatientDrillDownCountR
+		HashMap<String, String> PracticePerformanceTrendPatientDrillDownCountR = dashBoardTestsDB
+				.TC_PracticePerformanceTrendPatientDrillDownCountR(
+						TC_PracticePerformanceTrendPatientDrillDownCountR.get("Query"));
+
+		System.out.println("PracticePerformanceTrendPatientDrillDownCountR :"
+				+ PracticePerformanceTrendPatientDrillDownCountR.get("TotalPatient"));
+
+		ca.verifyAssertEquals((webCount), PracticePerformanceTrendPatientDrillDownCountR.get("TotalPatient"),
+				"Unable to verify \" " + (webCount)
+						+ "\" message Active patients from Database and UI is not getting matched.",
+				"\" " + (webCount) + "\"Active patients from Database and UI getting matched..", methodName, logger,
+				"TC_0021");
+
+	}
+	
+	// -------------------------------------------------------------------------------------------------------------------------
+
+	@AfterMethod
+	public void check(ITestResult result, Method method) {
+		if (result.getStatus() == ITestResult.FAILURE) {
+			captureFailureScreen(method.getName());
+			driver.navigate().refresh();
+			// ca.assertFailWithOutException("Fail: Method -"+methodName+" has
+			// been failed...");
+		}
+	}
+
+	@AfterClass
+	public void TearDown() {
+		report.endTest(logger);
+		report.flush();
+	}
+
+}

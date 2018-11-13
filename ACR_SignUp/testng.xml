@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+  
+<suite name="MyTestSuite1" verbose="1" >
+
+  <test name="TC_Signup" >
+    <classes>
+       <class name="page_Tests.ACR_LoginPage_Tests" />
+       <class name="page_Tests.ACR_PracticeInformation_Tests" />
+    </classes>
+  </test>
+ 
+</suite>
